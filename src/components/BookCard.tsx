@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, Image, Button } from "@nextui-org/react";
-import { FaBookOpen } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 
 interface BookData {
   id: string;
@@ -21,7 +21,7 @@ const BookCard: React.FC<{ book: BookData }> = ({ book }) => {
     <div className="group relative w-[200px] flex-shrink-0 perspective-1000 mx-4">
       <div
         className="relative w-full aspect-[2/3] transition-transform duration-500 transform-style-3d group-hover:rotate-y-[-10deg] cursor-pointer"
-        onClick={() => navigate(`/read/${book.id}`)}
+        onClick={() => navigate(`/book/${book.id}`)}
       >
         {/* Book Spine Effect */}
         <div className="absolute left-0 top-0 bottom-0 w-4 bg-[#8D7B68] transform -translate-x-2 translate-z-[-2px] rotate-y-[-90deg] rounded-l-sm"></div>
@@ -58,14 +58,19 @@ const BookCard: React.FC<{ book: BookData }> = ({ book }) => {
           {book.title}
         </h3>
         <p className="text-sm text-[#5C4033] font-medium mt-1">{book.author}</p>
+        {book.price !== undefined && (
+          <p className="text-sm font-bold text-primary mt-1">
+            ${book.price.toFixed(2)}
+          </p>
+        )}
         <Button
           size="sm"
           className="mt-2 bg-[#9A3B3B] text-white font-medium shadow-md hover:bg-[#9A3B3B]/90"
           radius="full"
-          startContent={<FaBookOpen size={12} />}
-          onPress={() => navigate(`/read/${book.id}`)}
+          startContent={<FaShoppingCart size={12} />}
+          onPress={() => navigate(`/book/${book.id}`)}
         >
-          Read Now
+          Buy Now
         </Button>
       </div>
     </div>
